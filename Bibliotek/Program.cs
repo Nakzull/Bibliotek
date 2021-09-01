@@ -59,15 +59,31 @@ namespace Bibliotek
                         Console.WriteLine("That book is unfortunately out of stock");
                     goto ReturnPoint;
                 case 5:
-                    foreach (var items in userBookCart)
-                    {                        
-                        Console.WriteLine("You selected {0}\nDo you still wish to borrow that book? (yes/no)", items.name);
+                    int count = userBookCart.Count;
+                    for (int i = 0; i < count; i++)
+                    {
+                        Console.WriteLine("You selected {0}\nDo you still wish to borrow that book? (yes/no)", userBookCart.Peek().name);
                         string userConfirm = Console.ReadLine();
                         if (userConfirm == "no")
-                            Console.WriteLine("{0} has been removed from your cart", userBookCart.Peek());
+                        {
+                            Console.WriteLine("{0} has been removed from your cart", userBookCart.Peek().name);
+                            if (userBookCart.Peek().name == "Harry Potter")
+                                harryPotter.stock++;
+                            else if (userBookCart.Peek().name == "Lord of the Rings")
+                                lordOfTheRings.stock++;
+                            else if (userBookCart.Peek().name == "Eragon")
+                                eragon.stock++;
+                            else if (userBookCart.Peek().name == "Red Rising")
+                                redRising.stock++;
+                            userBookCart.Pop();
+                        }
+                        else if (userConfirm == "yes")
+                        {
+                            Console.WriteLine("{0} has been checked out", userBookCart.Peek().name);
+                            userBookCart.Pop();
+                        }
                         else
-                            Console.WriteLine("{0} has been checked out", userBookCart.Peek());
-                        userBookCart.Pop();
+                            Console.WriteLine("Please type either yes or no");
                     }
                     break;
             }    

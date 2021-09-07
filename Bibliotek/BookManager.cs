@@ -7,6 +7,7 @@ namespace Bibliotek
 {
     public class BookManager
     {
+        // Instantiate my books and a list of books and a stack of books.
         Book harryPotter = new Book("Harry Potter", "J.K. Rowling", 2002, "Bloomsbury Publishing", 1);
         Book lordOfTheRings = new Book("Lord Of The Rings", "J.R. Tolkien", 1960, "Allen & Unwin", 2);
         Book eragon = new Book("Eragon", "Christopher Paolini", 2005, "Paolini", 1);
@@ -14,6 +15,7 @@ namespace Bibliotek
         List<Book> books = new List<Book>();
         Stack<Book> userBookCart = new Stack<Book>();
         
+        //Methods for adding each book to the list of books.
         public void AddHarryPotter(int book)
         {
             for (int i = 0; i < book; i++ )
@@ -34,11 +36,7 @@ namespace Bibliotek
             for (int i = 0; i < book; i++)
                 books.Add(redRising);
         }
-        public List<Book> GetBooks()
-        {
-            return books;
-        }
-
+        // Methods for checking if there are any of the book left in the list of books and if so reserve it by adding it to the stack of books.
         public void ReserveBookHarryPotter()
         {
             if (books.Contains(harryPotter) == true)
@@ -79,13 +77,14 @@ namespace Bibliotek
             else
                 Console.WriteLine("That book is unfortunately out of stock");
         }
+        // Methods for counting the amount of each book currently in the list of books.
         public int CountHarryPotter()
         {
             int length = books.Count;
             int count = 0;
             for (int i = 0; i < length; i++)
             {
-                if (books[i].Name == "Harry Potter")
+                if (books[i].name == "Harry Potter")
                 {
                     count++;
                 }
@@ -98,7 +97,7 @@ namespace Bibliotek
             int count = 0;
             for (int i = 0; i < length; i++)
             {
-                if (books[i].Name == "Lord Of The Rings")
+                if (books[i].name == "Lord Of The Rings")
                 {
                     count++;
                 }
@@ -111,7 +110,7 @@ namespace Bibliotek
             int count = 0;
             for (int i = 0; i < length; i++)
             {
-                if (books[i].Name == "Eragon")
+                if (books[i].name == "Eragon")
                 {
                     count++;
                 }
@@ -124,36 +123,38 @@ namespace Bibliotek
             int count = 0;
             for (int i = 0; i < length; i++)
             {
-                if (books[i].Name == "Red Rising")
+                if (books[i].name == "Red Rising")
                 {
                     count++;
                 }
             }
             return count;
         }
+        // Method for letting the user checkout the books he reserved in his stack of books earlier. The user will have to confirm each selection
+        // before it's successfully checked out. If the user doesn't confirm the checkout the book will be returned to the list of books.
         public void Checkout()
         {
             int count = userBookCart.Count;
             for (int i = 0; i < count; i++)
             {
-                Console.WriteLine("You selected {0}\nDo you still wish to borrow that book? (yes/no)", userBookCart.Peek().Name);
+                Console.WriteLine("You selected {0}\nDo you still wish to borrow that book? (yes/no)", userBookCart.Peek().name);
                 string userConfirm = Console.ReadLine().ToLower();
                 if (userConfirm == "no")
                 {
-                    Console.WriteLine("{0} has been removed from your cart", userBookCart.Peek().Name);
-                    if (userBookCart.Peek().Name == "Harry Potter")
+                    Console.WriteLine("{0} has been removed from your cart", userBookCart.Peek().name);
+                    if (userBookCart.Peek().name == "Harry Potter")
                         AddHarryPotter(1);
-                    else if (userBookCart.Peek().Name == "Lord Of The Rings")
+                    else if (userBookCart.Peek().name == "Lord Of The Rings")
                         AddLordOfTheRings(1);
-                    else if (userBookCart.Peek().Name == "Eragon")
+                    else if (userBookCart.Peek().name == "Eragon")
                         AddEragon(1);
-                    else if (userBookCart.Peek().Name == "Red Rising")
+                    else if (userBookCart.Peek().name == "Red Rising")
                         AddRedRising(1);
                     userBookCart.Pop();
                 }
                 else if (userConfirm == "yes")
                 {
-                    Console.WriteLine("{0} has been checked out", userBookCart.Peek().Name);
+                    Console.WriteLine("{0} has been checked out", userBookCart.Peek().name);
                     userBookCart.Pop();
                 }
                 else

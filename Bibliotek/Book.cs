@@ -6,52 +6,52 @@ namespace Bibliotek
 {
     public class Book
     {
-        private string name;
+        private string Name;
 
-        public string Name
+        public string name
         {
-            get { return name; }
-            set { name = value; }
+            get { return Name; }
+            set { Name = value; }
         }
-        private int year;
+        private int Year;
 
-        public int Year
+        public int year
         {
-            get { return year; }
-            set { year = value; }
-        }
-
-        private string author;
-
-        public string Author
-        {
-            get { return author; }
-            set { author = value; }
+            get { return Year; }
+            set { Year = value; }
         }
 
-        private string publisher;
+        private string Author;
 
-        public string Publisher
+        public string author
         {
-            get { return publisher; }
-            set { publisher = value; }
+            get { return Author; }
+            set { Author = value; }
         }
 
-        private int version;
+        private string Publisher;
 
-        public int Version
+        public string publisher
         {
-            get { return version; }
-            set { version = value; }
+            get { return Publisher; }
+            set { Publisher = value; }
         }
 
-        public Book(string name, string author, int year, string publisher, int version)
+        private int Version;
+
+        public int version
         {
-            Name = name;
-            Author = author;
-            Year = year;
-            Publisher = publisher;
-            Version = version;
+            get { return Version; }
+            set { Version = value; }
+        }
+
+        public Book(string Name, string Author, int Year, string Publisher, int Version)
+        {
+            name = Name;
+            author = Author;
+            year = Year;
+            publisher = Publisher;
+            version = Version;
         }
     }
 }

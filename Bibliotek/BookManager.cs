@@ -7,32 +7,129 @@ namespace Bibliotek
 {
     public class BookManager
     {
-        private List<Book> books = new List<Book>();
+        Book harryPotter = new Book("Harry Potter", "J.K. Rowling", 2002, "Bloomsbury Publishing", 1);
+        Book lordOfTheRings = new Book("Lord Of The Rings", "J.R. Tolkien", 1960, "Allen & Unwin", 2);
+        Book eragon = new Book("Eragon", "Christopher Paolini", 2005, "Paolini", 1);
+        Book redRising = new Book("Red Rising", "Pierce Brown", 2010, "Del Rey Books", 5);       
+        List<Book> books = new List<Book>();
         Stack<Book> userBookCart = new Stack<Book>();
+        
+        public void AddHarryPotter(int book)
+        {
+            for (int i = 0; i < book; i++ )
+            books.Add(harryPotter);
+        }
+        public void AddLordOfTheRings(int book)
+        {
+            for (int i = 0; i < book; i++)
+                books.Add(lordOfTheRings);
+        }
+        public void AddEragon(int book)
+        {
+            for (int i = 0; i < book; i++)
+                books.Add(eragon);
+        }
+        public void AddRedRising(int book)
+        {
+            for (int i = 0; i < book; i++)
+                books.Add(redRising);
+        }
         public List<Book> GetBooks()
         {
             return books;
         }
-        public void AddBooks()
+
+        public void ReserveBookHarryPotter()
         {
-            Book harryPotter = new Book("Harry Potter", "J.K. Rowling", 2002, "Bloomsbury Publishing", 1, 5);
-            Book lordOfTheRings = new Book("Lord of the Rings", "J.R. Tolkien", 1960, "Allen & Unwin", 2, 4);
-            Book eragon = new Book("Eragon", "Christopher Paolini", 2005, "Paolini", 1, 2);
-            Book redRising = new Book("Red Rising", "Pierce Brown", 2010, "Del Rey Books", 5, 3);
-            books.Add(harryPotter);
-            books.Add(lordOfTheRings);
-            books.Add(eragon);
-            books.Add(redRising);
-        }
-        public void GetBook(int userWish)
-        {
-            if (books[userWish - 1].Stock > 0)
+            if (books.Contains(harryPotter) == true)
             {
-                userBookCart.Push(books[userWish -1]);
-                books[userWish - 1].Stock--;
+                userBookCart.Push(harryPotter);
+                books.Remove(harryPotter);
             }
             else
                 Console.WriteLine("That book is unfortunately out of stock");
+        }
+        public void ReserveBookLordOfTheRings()
+        {
+            if (books.Contains(lordOfTheRings) == true)
+            {
+                userBookCart.Push(lordOfTheRings);
+                books.Remove(lordOfTheRings);
+            }
+            else
+                Console.WriteLine("That book is unfortunately out of stock");
+        }
+        public void ReserveBookEragon()
+        {
+            if (books.Contains(eragon) == true)
+            {
+                userBookCart.Push(eragon);
+                books.Remove(eragon);
+            }
+            else
+                Console.WriteLine("That book is unfortunately out of stock");
+        }
+        public void ReserveBookRedRising()
+        {
+            if (books.Contains(redRising) == true)
+            {
+                userBookCart.Push(redRising);
+                books.Remove(redRising);
+            }
+            else
+                Console.WriteLine("That book is unfortunately out of stock");
+        }
+        public int CountHarryPotter()
+        {
+            int length = books.Count;
+            int count = 0;
+            for (int i = 0; i < length; i++)
+            {
+                if (books[i].Name == "Harry Potter")
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        public int CountLordOfTheRings()
+        {
+            int length = books.Count;
+            int count = 0;
+            for (int i = 0; i < length; i++)
+            {
+                if (books[i].Name == "Lord Of The Rings")
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        public int CountEragon()
+        {
+            int length = books.Count;
+            int count = 0;
+            for (int i = 0; i < length; i++)
+            {
+                if (books[i].Name == "Eragon")
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        public int CountRedRising()
+        {
+            int length = books.Count;
+            int count = 0;
+            for (int i = 0; i < length; i++)
+            {
+                if (books[i].Name == "Red Rising")
+                {
+                    count++;
+                }
+            }
+            return count;
         }
         public void Checkout()
         {
@@ -44,8 +141,14 @@ namespace Bibliotek
                 if (userConfirm == "no")
                 {
                     Console.WriteLine("{0} has been removed from your cart", userBookCart.Peek().Name);
-                    if (userBookCart.Peek().Name == books[i].Name)
-                        books[i].Stock++;                   
+                    if (userBookCart.Peek().Name == "Harry Potter")
+                        AddHarryPotter(1);
+                    else if (userBookCart.Peek().Name == "Lord Of The Rings")
+                        AddLordOfTheRings(1);
+                    else if (userBookCart.Peek().Name == "Eragon")
+                        AddEragon(1);
+                    else if (userBookCart.Peek().Name == "Red Rising")
+                        AddRedRising(1);
                     userBookCart.Pop();
                 }
                 else if (userConfirm == "yes")

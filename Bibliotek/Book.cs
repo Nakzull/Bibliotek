@@ -45,22 +45,13 @@ namespace Bibliotek
             set { version = value; }
         }
 
-        private int stock;
-
-        public int Stock
-        {
-            get { return stock; }
-            set { stock = value; }
-        }
-
-        public Book(string name, string author, int year, string publisher, int version, int stock)
+        public Book(string name, string author, int year, string publisher, int version)
         {
             Name = name;
             Author = author;
             Year = year;
             Publisher = publisher;
             Version = version;
-            Stock = stock;
         }
     }
 }

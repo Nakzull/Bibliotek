@@ -4,24 +4,63 @@ using System.Text;
 
 namespace Bibliotek
 {
-    class Book
+    public class Book
     {
-        public string name { get; set; }
-        public int year { get; set; }
-        public string author { get; set; }
-        public string publisher { get; set; }
-        public int version { get; set; }
+        private string name;
 
-        public int stock { get; set; }
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+        private int year;
+
+        public int Year
+        {
+            get { return year; }
+            set { year = value; }
+        }
+
+        private string author;
+
+        public string Author
+        {
+            get { return author; }
+            set { author = value; }
+        }
+
+        private string publisher;
+
+        public string Publisher
+        {
+            get { return publisher; }
+            set { publisher = value; }
+        }
+
+        private int version;
+
+        public int Version
+        {
+            get { return version; }
+            set { version = value; }
+        }
+
+        private int stock;
+
+        public int Stock
+        {
+            get { return stock; }
+            set { stock = value; }
+        }
 
         public Book(string name, string author, int year, string publisher, int version, int stock)
         {
-            this.name = name;
-            this.author = author;
-            this.year = year;
-            this.publisher = publisher;
-            this.version = version;
-            this.stock = stock;
+            Name = name;
+            Author = author;
+            Year = year;
+            Publisher = publisher;
+            Version = version;
+            Stock = stock;
         }
     }
 }

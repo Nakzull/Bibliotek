@@ -9,19 +9,21 @@ namespace Bibliotek
         {
             // Instatitiate my bookmanager and add books to the list of books.
             BookManager bookManager = new BookManager();
-            bookManager.AddHarryPotter(5);
-            bookManager.AddLordOfTheRings(4);
-            bookManager.AddEragon(2);
-            bookManager.AddRedRising(3);
-            
+            bookManager.AddBooksToRegister();
+            List<Book> bookLookUp = bookManager.GetBookLookUp();
+            bookManager.AddBook(bookLookUp[0], 5);
+            bookManager.AddBook(bookLookUp[1], 4);
+            bookManager.AddBook(bookLookUp[2], 2);
+            bookManager.AddBook(bookLookUp[3], 3);
+
             // Infinity loop.
             for (; ; )
             {
                 // Variables used to count the total amount of each book in the current stack.
-                int harryPotterCount = bookManager.CountHarryPotter();
-                int lordOfTheRingsCount = bookManager.CountLordOfTheRings();
-                int eragonCount = bookManager.CountEragon();
-                int redRisingCount = bookManager.CountRedRising();
+                int harryPotterCount = bookManager.CountBook("Harry Potter");
+                int lordOfTheRingsCount = bookManager.CountBook("Lord Of The Rings");
+                int eragonCount = bookManager.CountBook("Eragon");
+                int redRisingCount = bookManager.CountBook("Red Rising");
                 Console.WriteLine("Which book do you wish to borrow? ");
                 Console.WriteLine($"1. Harry Potter - number in stock: {harryPotterCount}");
                 Console.WriteLine($"2. Lord Of The Rings - number in stock: {lordOfTheRingsCount}");
@@ -30,14 +32,8 @@ namespace Bibliotek
                 Console.WriteLine("5. Done selecting books");
                 // Get the users input and check if it's valid.
                 int userWish = Convert.ToInt32(Console.ReadLine());
-                if (userWish == 1)
-                    bookManager.ReserveBookHarryPotter();
-                else if (userWish == 2)
-                    bookManager.ReserveBookLordOfTheRings();
-                else if (userWish == 3)
-                    bookManager.ReserveBookEragon();
-                else if (userWish == 4)
-                    bookManager.ReserveBookRedRising();
+                if (userWish >= 1 && userWish <= 4)
+                    bookManager.ReserveBook(bookLookUp[userWish - 1]);
                 else if (userWish == 5)
                 {
                     bookManager.Checkout();

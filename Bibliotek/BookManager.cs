@@ -7,129 +7,61 @@ namespace Bibliotek
 {
     public class BookManager
     {
-        // Instantiate my books and a list of books and a stack of books.
+        // Instantiate my books and a list with a register of books, a list of all books in the library and a stack of books.
         Book harryPotter = new Book("Harry Potter", "J.K. Rowling", 2002, "Bloomsbury Publishing", 1);
         Book lordOfTheRings = new Book("Lord Of The Rings", "J.R. Tolkien", 1960, "Allen & Unwin", 2);
         Book eragon = new Book("Eragon", "Christopher Paolini", 2005, "Paolini", 1);
-        Book redRising = new Book("Red Rising", "Pierce Brown", 2010, "Del Rey Books", 5);       
+        Book redRising = new Book("Red Rising", "Pierce Brown", 2010, "Del Rey Books", 5);
+        List<Book> bookRegister = new List<Book>();
         List<Book> books = new List<Book>();
         Stack<Book> userBookCart = new Stack<Book>();
-        
-        //Methods for adding each book to the list of books.
-        public void AddHarryPotter(int book)
+
+        // Method for adding one of each book to the register.
+        public void AddBooksToRegister()
         {
-            for (int i = 0; i < book; i++ )
-            books.Add(harryPotter);
+            bookRegister.Add(harryPotter);
+            bookRegister.Add(lordOfTheRings);
+            bookRegister.Add(eragon);
+            bookRegister.Add(redRising);
         }
-        public void AddLordOfTheRings(int book)
+        public List<Book> GetBookLookUp()
         {
-            for (int i = 0; i < book; i++)
-                books.Add(lordOfTheRings);
+            return bookRegister;
         }
-        public void AddEragon(int book)
+    
+        // Method for adding a book to the list of books.
+        public void AddBook(Book book, int amount)
         {
-            for (int i = 0; i < book; i++)
-                books.Add(eragon);
+            for (int i = 0; i < amount; i++ )
+            books.Add(book);
         }
-        public void AddRedRising(int book)
+        // Method for checking if there are any of the book left in the list of books and if so reserve it by adding it to the stack of books.
+        public void ReserveBook(Book name)
         {
-            for (int i = 0; i < book; i++)
-                books.Add(redRising);
-        }
-        // Methods for checking if there are any of the book left in the list of books and if so reserve it by adding it to the stack of books.
-        public void ReserveBookHarryPotter()
-        {
-            if (books.Contains(harryPotter) == true)
+            if (books.Contains(name) == true)
             {
-                userBookCart.Push(harryPotter);
-                books.Remove(harryPotter);
+                userBookCart.Push(name);
+                books.Remove(name);
             }
             else
                 Console.WriteLine("That book is unfortunately out of stock");
         }
-        public void ReserveBookLordOfTheRings()
+
+        // Method for counting the amount of a book currently in the list of books.
+        public int CountBook(string name)
         {
-            if (books.Contains(lordOfTheRings) == true)
-            {
-                userBookCart.Push(lordOfTheRings);
-                books.Remove(lordOfTheRings);
-            }
-            else
-                Console.WriteLine("That book is unfortunately out of stock");
-        }
-        public void ReserveBookEragon()
-        {
-            if (books.Contains(eragon) == true)
-            {
-                userBookCart.Push(eragon);
-                books.Remove(eragon);
-            }
-            else
-                Console.WriteLine("That book is unfortunately out of stock");
-        }
-        public void ReserveBookRedRising()
-        {
-            if (books.Contains(redRising) == true)
-            {
-                userBookCart.Push(redRising);
-                books.Remove(redRising);
-            }
-            else
-                Console.WriteLine("That book is unfortunately out of stock");
-        }
-        // Methods for counting the amount of each book currently in the list of books.
-        public int CountHarryPotter()
-        {
-            int length = books.Count;
             int count = 0;
-            for (int i = 0; i < length; i++)
+            for (int i = 0; i < books.Count; i++)
             {
-                if (books[i].Name == "Harry Potter")
+                if (books[i].Name == name)
                 {
                     count++;
                 }
             }
             return count;
         }
-        public int CountLordOfTheRings()
-        {
-            int length = books.Count;
-            int count = 0;
-            for (int i = 0; i < length; i++)
-            {
-                if (books[i].Name == "Lord Of The Rings")
-                {
-                    count++;
-                }
-            }
-            return count;
-        }
-        public int CountEragon()
-        {
-            int length = books.Count;
-            int count = 0;
-            for (int i = 0; i < length; i++)
-            {
-                if (books[i].Name == "Eragon")
-                {
-                    count++;
-                }
-            }
-            return count;
-        }
-        public int CountRedRising()
-        {
-            int length = books.Count;
-            int count = 0;
-            for (int i = 0; i < length; i++)
-            {
-                if (books[i].Name == "Red Rising")
-                {
-                    count++;
-                }
-            }
-            return count;
-        }
+
+    
         // Method for letting the user checkout the books he reserved in his stack of books earlier. The user will have to confirm each selection
         // before it's successfully checked out. If the user doesn't confirm the checkout the book will be returned to the list of books.
         public void Checkout()
@@ -143,13 +75,13 @@ namespace Bibliotek
                 {
                     Console.WriteLine("{0} has been removed from your cart", userBookCart.Peek().Name);
                     if (userBookCart.Peek().Name == "Harry Potter")
-                        AddHarryPotter(1);
+                        AddBook(harryPotter, 1);
                     else if (userBookCart.Peek().Name == "Lord Of The Rings")
-                        AddLordOfTheRings(1);
+                        AddBook(lordOfTheRings, 1);
                     else if (userBookCart.Peek().Name == "Eragon")
-                        AddEragon(1);
+                        AddBook(eragon, 1);
                     else if (userBookCart.Peek().Name == "Red Rising")
-                        AddRedRising(1);
+                        AddBook(redRising, 1);
                     userBookCart.Pop();
                 }
                 else if (userConfirm == "yes")
@@ -158,7 +90,10 @@ namespace Bibliotek
                     userBookCart.Pop();
                 }
                 else
+                {
                     Console.WriteLine("Please type either yes or no");
+                    count++;
+                }
             }
         }
     }

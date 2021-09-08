@@ -84,7 +84,7 @@ namespace Bibliotek
             int count = 0;
             for (int i = 0; i < length; i++)
             {
-                if (books[i].name == "Harry Potter")
+                if (books[i].Name == "Harry Potter")
                 {
                     count++;
                 }
@@ -97,7 +97,7 @@ namespace Bibliotek
             int count = 0;
             for (int i = 0; i < length; i++)
             {
-                if (books[i].name == "Lord Of The Rings")
+                if (books[i].Name == "Lord Of The Rings")
                 {
                     count++;
                 }
@@ -110,7 +110,7 @@ namespace Bibliotek
             int count = 0;
             for (int i = 0; i < length; i++)
             {
-                if (books[i].name == "Eragon")
+                if (books[i].Name == "Eragon")
                 {
                     count++;
                 }
@@ -123,7 +123,7 @@ namespace Bibliotek
             int count = 0;
             for (int i = 0; i < length; i++)
             {
-                if (books[i].name == "Red Rising")
+                if (books[i].Name == "Red Rising")
                 {
                     count++;
                 }
@@ -137,24 +137,24 @@ namespace Bibliotek
             int count = userBookCart.Count;
             for (int i = 0; i < count; i++)
             {
-                Console.WriteLine("You selected {0}\nDo you still wish to borrow that book? (yes/no)", userBookCart.Peek().name);
+                Console.WriteLine("You selected {0}\nDo you still wish to borrow that book? (yes/no)", userBookCart.Peek().Name);
                 string userConfirm = Console.ReadLine().ToLower();
                 if (userConfirm == "no")
                 {
-                    Console.WriteLine("{0} has been removed from your cart", userBookCart.Peek().name);
-                    if (userBookCart.Peek().name == "Harry Potter")
+                    Console.WriteLine("{0} has been removed from your cart", userBookCart.Peek().Name);
+                    if (userBookCart.Peek().Name == "Harry Potter")
                         AddHarryPotter(1);
-                    else if (userBookCart.Peek().name == "Lord Of The Rings")
+                    else if (userBookCart.Peek().Name == "Lord Of The Rings")
                         AddLordOfTheRings(1);
-                    else if (userBookCart.Peek().name == "Eragon")
+                    else if (userBookCart.Peek().Name == "Eragon")
                         AddEragon(1);
-                    else if (userBookCart.Peek().name == "Red Rising")
+                    else if (userBookCart.Peek().Name == "Red Rising")
                         AddRedRising(1);
                     userBookCart.Pop();
                 }
                 else if (userConfirm == "yes")
                 {
-                    Console.WriteLine("{0} has been checked out", userBookCart.Peek().name);
+                    Console.WriteLine("{0} has been checked out", userBookCart.Peek().Name);
                     userBookCart.Pop();
                 }
                 else
